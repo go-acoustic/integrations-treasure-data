@@ -1,10 +1,10 @@
-# Workflow: td example (Result Output to SFTP)
+# Treasure data integration with Acoustic Campaign
 
-This example workflow ingests data in daily basis, using [Treasure Data's Writing Job Results into SFTP](https://docs.treasuredata.com/display/public/INT/SFTP+Server+Export+Integration) with [td](https://docs.digdag.io/operators/td.html) operator.
+This example workflow sends Audience data from Treasure Data to Acoustic Campaign on a daily basis, using [Treasure Data's Writing Job Results into SFTP](https://docs.treasuredata.com/display/public/INT/SFTP+Server+Export+Integration) with [td](https://docs.digdag.io/operators/td.html) operator.
 
 # Prerequisites
 
-In order to register your credential in TreasureData, please create connection setting on [Connector UI](https://console.treasuredata.com/app/connections).
+In order to register your Acoustic Campaign sftp credentials in TreasureData, please create connection setting on [Connector UI](https://console.treasuredata.com/app/connections).
 
 ![](https://t.gyazo.com/teams/treasure-data/fc51459feff2d086df97f5f7eb8f6f72.png)
 
@@ -14,7 +14,7 @@ The connection name is used in the dig file.
 
 # How to Run
 
-First, please upload your workflow project by `td wf push` command.
+First, upload the workflow project by `td wf push` command.
 
     # Upload
     $ td wf push td_sftp
@@ -39,22 +39,27 @@ You can trigger the session manually.
     # Run
     $ td wf run td_sftp.dig
 
-# Supplemental
+# Set the database to import into
 
-Available parameters for `result_settings` are here.
 
-- user_directory_is_root: (boolean(true|false), default true)
-- path_prefix: Prefix of output paths (string, required)
-- format: (string(csv|tsv), default csv)
-- compression: (string(None|gz|bzip2), default None)
-- header_line: (boolean(true|false), default true)
-- delimiter: (string(","|"\t"), default ",")
-- quote_policy: (string(ALL|MINIMAL|NONE))
-- null_string: (string(""|"\N"|NULL|null), default "")
-- newline: (string(CRLF|CR|LF), default CRLF)
+# Set the field mappings for the import
 
-For more details, please see [Treasure Data documentation](https://docs.treasuredata.com/display/public/INT/SFTP+Server+Export+Integration#SFTPServerExportIntegration-UsagefromCLI)
+TODO
+
+
+# Additional configuration
+
+Additional parameters for `result_settings` are here.
+
+
+
+For more details, please see Acoustic documentation
+
+TODO - link
+
+
+and [Treasure Data documentation](https://docs.treasuredata.com/display/public/INT/SFTP+Server+Export+Integration#SFTPServerExportIntegration-UsagefromCLI)
 
 # Next Step
 
-If you have any questions, please contact support@treasure-data.com.
+If you have any questions, please contact support@acoustic.com.
