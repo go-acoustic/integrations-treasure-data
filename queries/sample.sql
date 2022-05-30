@@ -1,1 +1,1 @@
-select count(*) cnt from www_access;
+select count(*) cnt from my_db;
