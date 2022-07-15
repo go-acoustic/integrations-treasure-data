@@ -1,0 +1,38 @@
+# Set workflow secrets for
+# ca_sftp_user
+# ca_sftp_pass
+# ca_client_id
+# ca_client_secret
+# ca_refresh_token
+# td_apikey
+# action can be one of : CREATE, ADD_AND_UPDATE, ADD_ONLY, UPDATE_ONLY, OPT_OUT
+# when action other than CREATE parameter list_id needs to be set
+# contact_lists : ids of existing contact list, does not support action OPT_OUT
+# list_type can be one of : DATABASE, SEED_LIST, SUPPRESSION_LIST
+# list_visibility can be PRIVATE or SHARED
+
++import_table_to_campaign:
+  py>: logic.import_table_to_campaign
+  td_database: <your_db_name>
+  td_table_name: <your_table_name>
+  list_type: <ca_list_type>
+  list_visibility: <list_visibility>
+  columns_to_ignore: ['<column_name>']
+  action: <action>
+  list_id: <ca_database_id>
+  sync_fields: ['<column_name>', '<other_column_name>']
+  contact_lists: ['<contact_list_id>']
+  _env:
+    TD_API_KEY: ${secret:td_apikey}
+    TD_API_SERVER: <td_api_server>
+    CA_API_SERVER: <ca_api_server>
+    CA_SFTP_SERVER: <ca_sftp_server>
+    CA_SFTP_USER: ${secret:ca_sftp_user}
+    CA_SFTP_PASS: ${secret:ca_sftp_pass}
+    CA_CLIENT_ID: ${secret:ca_client_id}
+    CA_CLIENT_SECRET: ${secret:ca_client_secret}
+    CA_REFRESH_TOKEN: ${secret:ca_refresh_token}
+  docker:
+    image: "digdag/digdag-python:3.9"
+
+

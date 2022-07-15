@@ -1,0 +1,6 @@
+README.md
+LICENSE
+secrets.yaml
+
+__pycache__/
+.idea/
