@@ -35,3 +35,43 @@ This treasure box can be used to set up ingest of Treasure Data audiences into A
 ## What next
 
 You can now use the workflow that has been created to export databases from Treasure data to Acoustic Campaign.
+
+# Treasure Data (TD) integration with Acoustic Campaign
+1. Acoustic Campaign doesn’t allow a column name with less than 3 characters.
+2. Remember that the tool will not display the password when logging in on Treasure Data. When you write it, nothing will appear on the table.
+
+## Treasure Data configuration
+### Step 1
+1. Create a webhook endpoint using (Postback API) TD template https://docs.treasuredata.com/display/public/PD/Sites+and+Endpoints
+    An example of an US endpoint: https://in.treasuredata.com/postback/v3/event/<workflowname>/<tablename>?td_write_key=xyz.
+2.  Raise a support ticket with Acoustic to add your webhook endpoint. Please specify what events you want to subscribe to.
+
+### Step 2
+1. Once the events endpoint is set up, events will start adding to your TD account.
+2. Create a Master Segment.
+3. Specify Schedule: You can schedule how often the master segment should be run.
+4. Add Master Table: This should be your main table.
+5. Add Behaviour Table: Select the table with your events.
+6. Add Attribute Table: Choose what column you want to add to your segment table.
+7. Run the new segment.
+8. Go to Audience Studio and choose the Master Segment that you just created.
+9. You can create new Segments inside the Parent segment using the events you sent to Treasure Data.
+
+#### If you want to push back results of your segments back to the table, use the Activation tab.
+1. Create Activation.
+2. Add name and description.
+3. Choose authentication (See 'How to add own authentication' below if you do not have one set up).
+4. Add Database and a new Table name.
+5. Select mode.
+6. In the Output Mapping tab you can choose mapping.
+7. In the Schedule tab, you can set up a schedule for how often this segment should run and output results to the table.
+8. After set up run the activation and new table should be created.
+9. Set up new workflow for new table (update details of the table and action in your dig file).
+10. You can do so by using command "td wf push <YOUR_PROJECT_NAME>".
+11. Start workflow on TreasureData using command td wf start <YOUR_PROJECT_NAME> td_table_to_campaign --session now.
+
+#### If you need to create a new workflow you also need to push the secrets again with this command: td wf secrets --project <YOUR_PROJECT_NAME> --set @secrets.yaml before starting the workflow.
+How to add your authentication:
+1. Click on https://console.treasuredata.com/app/integrations/authentications.
+2. Click Catalog.
+3. Find Treasure Data, and if you are setting up authentication within your account, press "continue" and name the authenticator. If you want to add data to a different account, you need to provide API Key and API hostname.
